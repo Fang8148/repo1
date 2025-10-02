@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style> 
+      body,
+      html {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .login {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      }
+      .login .login_box {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .login .login_box .login_box_title h1 {
+        text-align: center;
+        font-size: 40px;
+      }
+
+      .login .login_box .login_box_form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .login .login_box .login_box_form .content {
+        display: grid;
+        gap: 4px;
+      }
+
+      .login .login_box .login_box_form .content input,
+      .login .login_box .login_box_form .content button {
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 16px;
+        line-height: 32px;
+        border-width: 1px;
+      }
+      .login .login_box .login_box_form .content button {
+        background-color: rgb(29, 61, 71);
+        margin-top: 16px;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <div class="login_box">
+        <!-- title -->
+        <div class="login_box_title">
+          <h1>LOGIN</h1>
+        </div>
+        <!-- container -->
+        <form class="login_box_form">
+          <div class="content">
+            <label>login.....</label>
+            <input />
+          </div>
+          <div class="content">
+            <label>password....</label>
+            <input />
+          </div>
+
+          <div class="content button">
+            <button>Log in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
