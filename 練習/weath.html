@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+    <style>
+        body,
+        html {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-image: url(weather.jpg);
+            font-family: Arial, sans-serif;
+        }
+
+        .weather {
+            display: flex;
+            gap: 25px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .weather .weather_card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 4px rgba(128, 128, 128, 6);
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 640px;
+            width: 100%;
+            /* overflow: hidden; */
+        }
+
+        .weather .weather_card .weather_card_header {
+            width: 100%;
+            height: 110px;
+            background-color: #BDD4FF;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            box-shadow: 0 2px 3px rgba(128, 128, 128, 6);
+
+        }
+
+        .weather .weather_button {
+            padding-left: 20px;
+            padding-right: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: -100px;
+        }
+
+        .weather .weather_button button {
+            font-size: 24px;
+            background-color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 4px rgba(128, 128, 128, 6);
+            cursor: pointer;
+            text-align: center;
+            width: 160px;
+            height: 50px;
+        }
+
+        .weather .weather_button button:active {
+            background-color: #080E76;
+            color: rgb(255, 255, 255);
+        }
+
+        .weather .weather_form .content {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 15px;
+            /* font-size: 24px; */
+        }
+
+        .weather .weather_form .content label {
+            font-size: 20px;
+        }
+
+        /* select input start */
+        /* 共同的內容 */
+        .weather .weather_form .content.date>input,
+        .weather .weather_form .content select {
+            font-size: 16px;
+            border-radius: 12px;
+            margin-top: 8px;
+            width: 100%;
+            border-color: #E5E7EA;
+        }
+
+        .weather .weather_form .content select {
+            padding: 12px;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background: url('nav-arrow-down.svg');
+            background-repeat: no-repeat;
+            background-position: calc(100% - 12px) 50%;
+        }
+
+        .weather .weather_form .content.date>input {
+            width: 100%;
+            box-sizing: border-box;
+            /* outline: none; */
+            /* stroke: none; */
+            border-width: 1px;
+            border-style: solid;
+            line-height: auto;
+            padding: calc(15px/2) 12px;
+        }
+
+        /* end */
+
+        .weather .weather_form .content.date>input:focus-visible,
+        .weather .weather_form .content select:focus-visible {
+            outline: 1px solid #bcbec2
+        }
+
+        .weather_form .content_button {
+            padding-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .weather .weather_form .content_button button {
+            font-size: 32px;
+            background-color: #080E76;
+            color: white;
+            padding: 5px 5px;
+            border: none;
+            border-radius: 999px;
+            box-shadow: 0 4px 4px rgba(128, 128, 128, 6);
+            cursor: pointer;
+            text-align: center;
+            width: 160px;
+            height: 70px;
+        }
+
+        .weather .weather_form .content_button button:active {
+            background-color: #6d6d6e;
+            color: rgb(20, 20, 20);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="weather">
+        <!-- background_card -->
+        <div class="weather_card">
+            <div class="weather_card_header"> </div>
+            <!-- title button -->
+            <div class="weather_button">
+                <button>過去查詢</button>
+                <button>今日查詢</button>
+                <button>未來一週</button>
+            </div>
+            <!-- container -->
+            <form class="weather_form">
+                <div class="content">
+                    <label>選擇縣/市</label><br>
+                    <select class="weather_select" id="city">
+                        <option value="---">---</option>
+                    </select>
+                </div>
+                <div class="content">
+                    <label>選擇鄉/鎮</label><br>
+                    <select class="weather_select" id="area">
+                        <option value="---">---</option>
+                    </select>
+                </div>
+                <div class="content date">
+                    <label>選擇日期</label><br>
+                    <input type="date">
+                </div>
+                <div class="content_button">
+                    <button>查詢</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- javascript -->
+    <script>
+
+        // 建立空的變數
+        let APIRes;
+
+        const city = document.getElementById('city')
+        const area = document.getElementById('area')
+
+        // 讀取資料
+        async function loadData() {
+            try {
+                const response = await fetch('tw.json');
+                APIRes = await response.json();
+            } catch (error) {
+                console.error('加载 JSON 失败:', error);
+            }
+        }
+
+        // 等 DOM 加载完成后再執行讀取資料
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadData();
+            selectValue()
+        });
+
+
+        function selectValue() {
+            for (let index = 0; index < APIRes.length; index++) {
+                const cityValue = APIRes[index].name;
+
+                // 寫法1
+                // const newElement = document.createElement("option");
+                // newElement.innerText = cityValue
+                // newElement.value = cityValue
+                // city.insertAdjacentElement('beforeend',newElement)
+
+                // 寫法2
+                const insertHtml = `
+                    <option value="${index}">${cityValue}</option>
+                `
+                city.insertAdjacentHTML('beforeend', insertHtml)
+
+            }
+
+                  console.log(APIRes[0].districts)
+        }
+
+        function optionValue(key) {
+
+            const cityArea = APIRes[key].districts
+
+            for (let index = 0; index < cityArea.length; index++) {
+                const areaValue = APIRes[key].districts[index].name
+
+                const insertHtml = `
+                    <option value="${index}">${areaValue}</option>
+                `
+                area.insertAdjacentHTML('beforeend', insertHtml)
+
+            }
+        }
+
+
+        city.addEventListener('change',(event)=>{
+            area.innerHTML = '<option value="---">---</option>'
+            optionValue(event.target.value)
+        })
+
+    </script>
+
+
+
+
+</body>
+
+</html>
