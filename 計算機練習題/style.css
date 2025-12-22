@@ -1,0 +1,72 @@
+body{
+    margin: 0;  /*外邊距設為 0。*/
+    display: flex; /* 啟動彈性佈局 */
+    justify-content: center; /* 水平置中 */ 
+    align-items: center; /* 上下置中 */
+    height: 100vh; /* 撐滿整個螢幕高度 */
+    background-color: white; /* 通常會選一點點灰，讓白色的計算機更明顯 */
+}
+#calculator{
+    font-family: Arial, Helvetica, sans-serif; /* 設定字體 */
+    background-color: rgb(255,246,204); /* 設定顏色 */
+    border-radius: 15px; /* 邊框圓角 */
+    max-width: 500px; /* 最大寬度 設定寬度在400px */
+    overflow: hidden; /* 溢出隱藏 如果內容物超出去了就被自動切掉了 */
+    border: none; /* 無邊框 */
+}
+
+#display{
+    width: 100%;  /* 寬度100% */
+    padding: 20px; /* 內邊框 20px */
+    font-size: 5rem; /* 字體大小 */
+    text-align: left; /* 字體向左靠 */
+    border: none; /* 去除邊框 */
+    background-color: rgb(224, 179, 134); /* 背景顏色 */
+    color: white; /* 文字顏色 */
+}
+
+
+#key{
+    display: grid;/* 排列:啟動網格模式 */
+    grid-template-columns: repeat(4,1fr);
+    /* 定義列直欄 repeat 4 重複4次 1fr 代表每一欄 平分剩下空間 */
+    gap: 10px; /* 格子之間的間距 */
+    padding: 25px; /*內邊框  */
+}
+
+button{
+    width: 100px;
+    height: 100px;
+    /* 設定高度與寬度都式100px 這是設定圓型的第一步 */
+    border-radius: 50px; /* 邊框圓角設定 50 */
+    border: none; /* 去掉邊框 */
+    background-color: rgb(224, 179, 134);/* 背景顏色 */
+    color: white; /* 字體顏色 */
+    font-size: 3rem; /* 字體的大小 */
+    font-weight: bold; /* 字體加粗 */
+    cursor: pointer;  /* 滑鼠遊標樣式 */ 
+}
+
+button:hover{
+    background-color: rgb(234, 204, 174);
+    /* 滑鼠停下 會變色 */
+}
+
+button:active{
+    background-color: rgb(245, 230, 214);
+    /* 滑鼠點擊 會變色 */
+}
+
+.operator-btn{
+    background-color: rgb(255, 157, 77);
+    /* 將功能性的鍵盤 設定顏色 */
+}
+
+.operator-btn:hover{
+    background-color: rgb(255, 188, 133);
+    /* 滑鼠移過去會改變顏色 */
+}
+
+/* 前面沒有打:針對每一個標籤*/
+/* 前面打. :類別選擇器 針對有class標籤*/
+/* 前面打# :ID選擇器 針對有id的標籤 */

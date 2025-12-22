@@ -3,29 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="calculator_button">
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>/</button>
-        <br>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>*</button>
-        <br>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>-</button>
-        <br>
-        <button>C</button>
-        <button>0</button>
-        <button>.</button>
-        <button>=</button>
+    <div id="calculator">
+        <input id ="display" readonly>
+        <!-- input是空標籤所以不需要</input>入框按鈕 -->
+        <!-- 如果是用來包文字的內容需要加 -->
+        <!-- readonly是一個布林值 -->
+        <!-- 功能可以看見輸入框內容可以點擊選取與複製內容但無法修改 -->
+        <div id="keys">
+            <button onclick="appenToDisplay('+')" class="operator-btn">+</button>
+            <!-- onclick 是監聽事件捕捉點擊這動作 -->
+            <!--appendToDisplay('+')這是呼叫一個寫好的JavaScript函式  -->
+            <!-- class是為了方便CSS -->
+            <button onclick="appenToDisplay('7')">7</button>
+            <button onclick="appenToDisplay('8')">8</button>
+            <button onclick="appenToDisplay('9')">9</button>
+            <button onclick="appenToDisplay('-')" class="operator-btn">-</button>
+            <button onclick="appenToDisplay('4')">4</button>
+            <button onclick="appenToDisplay('5')">5</button>
+            <button onclick="appenToDisplay('6')">6</button>
+            <button onclick="appenToDisplay('*')" class="operator-btn">x</button>
+            <button onclick="appenToDisplay('1')">1</button>
+            <button onclick="appenToDisplay('2')">2</button>
+            <button onclick="appenToDisplay('3')">3</button>
+            <button onclick="appenToDisplay('/')" class="operator-btn">/</button>
+            <button onclick="appenToDisplay('0')">0</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="clearDisplay()" class="operator-btn">C</button>
+            <!--calculate 是呼叫負責運算的函式  -->
+            <!--當我按下= javascript 會去抓取 input id display的字串裡面的值並且計算出來-->
+            <!-- clearDisplay是一個清空的函式 將input裡面的字串清空 -->
+        </div>
     </div>
+    <script src ="calculator.js">//使其無法輸入文字只能輸入數字
+
+    </script>
 </body>
 </html>
